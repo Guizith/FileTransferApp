@@ -40,7 +40,7 @@
      <string>Destination:</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="regx_txt">
+   <widget class="QLineEdit" name="regex_txt">
     <property name="geometry">
      <rect>
       <x>280</x>
@@ -93,7 +93,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Regx:</string>
+     <string>Regex:</string>
     </property>
    </widget>
   </widget>

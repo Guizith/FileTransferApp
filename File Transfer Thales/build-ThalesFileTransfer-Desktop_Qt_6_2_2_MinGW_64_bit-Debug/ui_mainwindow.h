@@ -27,7 +27,7 @@ public:
     QWidget *centralwidget;
     QLabel *label_2;
     QLabel *label_3;
-    QLineEdit *regx_txt;
+    QLineEdit *regex_txt;
     QLineEdit *src_txt;
     QLineEdit *dst_txt;
     QPushButton *run_button;
@@ -48,9 +48,9 @@ public:
         label_3 = new QLabel(centralwidget);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(210, 220, 71, 16));
-        regx_txt = new QLineEdit(centralwidget);
-        regx_txt->setObjectName(QString::fromUtf8("regx_txt"));
-        regx_txt->setGeometry(QRect(280, 140, 113, 24));
+        regex_txt = new QLineEdit(centralwidget);
+        regex_txt->setObjectName(QString::fromUtf8("regex_txt"));
+        regex_txt->setGeometry(QRect(280, 140, 113, 24));
         src_txt = new QLineEdit(centralwidget);
         src_txt->setObjectName(QString::fromUtf8("src_txt"));
         src_txt->setGeometry(QRect(280, 180, 113, 24));
@@ -83,7 +83,7 @@ public:
         label_2->setText(QCoreApplication::translate("MainWindow", "Source:", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "Destination:", nullptr));
         run_button->setText(QCoreApplication::translate("MainWindow", "Run", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "Regx:", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Regex:", nullptr));
     } // retranslateUi
 
 };
