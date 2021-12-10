@@ -5,16 +5,26 @@
 #include <QByteArray>
 #include <regex>
 #include <dirent.h>
-#include <qthread.h>
+#include <QDir>
 #include <QDateTime>
 #include <QLineEdit>
+#include <QFileDialog>
+
+
+//File name: ts321dsad.txt
+// Regex =       (ts[^]?)
+// Source =      X:\TesteCpp\
+// Destination = C:\temp\
+
+//Teste OK!
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    //Registrando inicializacao no arquivo de log
+    putstartlog();
     //objeto QTimer para auto refresh
     tempo = new QTimer(this);
 
@@ -29,12 +39,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_run_button_clicked()
 {
 
-//File name: ts321dsad.txt
-// Regex =       (ts[^]?)
-// Source =      X:\TesteCpp\
-// Destination = C:\temp\
 
-//Teste OK!
 
     //Leitura do campo
     QString src = ui->src_txt->text();
@@ -53,21 +58,38 @@ void MainWindow::on_run_button_clicked()
     std:: regex reg(rgxstr);
     std::cmatch matches;
 
+    bool rgxerror = false;
+    if(rgx == ""){
+        QMessageBox messageBoxQuestion;
+        QMessageBox::StandardButton ans;
+        ans = messageBoxQuestion.question(0,"Error","Nenhuma Regex digitada, deseja continuar?",QMessageBox::Yes|QMessageBox::No);
+        messageBoxQuestion.setFixedSize(500,200);
+        qDebug() << ans;
+        if(ans == QMessageBox::No){
+            rgxerror = true;
+            qDebug() << rgxerror << "regex";
+        }
+    }
 
 
-
-    //Navegação até o diretorio source (replicar para dst e QMessageBox Error)
+    //Navegação até o diretorio source/destination (replicar para dst e QMessageBox Error)
     bool errorsts = false;      //Flag para erros
+    if (chdir(dststr) == -1) {
+            qDebug() << "Erro no dst";
+            errorsts = true;
+            stopfunc();
+        }
+
     if (chdir(srcstr) == -1) {
             qDebug() << "Erro no src";
             errorsts = true;
             stopfunc();
         }
 
+
     //Listagem do diretorio
     DIR *dirp = opendir(".");
 
-    //Verificação de erro de listagem
     if (!dirp) {
         errorsts = true;
         perror("Can't open directory");
@@ -76,7 +98,7 @@ void MainWindow::on_run_button_clicked()
 
 
     //Verificação de erros no diretorio.
-    if(errorsts == false){
+    if(errorsts == false && rgxerror == false){
 
        // Loop parar percorrer todo diretorio
           for (struct dirent *dent; (dent = readdir(dirp)) != NULL; )
@@ -102,14 +124,20 @@ void MainWindow::on_run_button_clicked()
                   strcpy(dstfile,dststr);
                   strcat(dstfile,nm);
 
+                  //Registro de log de transferencia de arquivo
+                  putlog(srcfile,dstfile);
+
                   rename(srcfile,dstfile);
                 }
              }
        closedir(dirp);
-    }else{
+    }else if(errorsts == true){
         QMessageBox messageBoxError;
         messageBoxError.critical(0,"Error","The specified directory is invalid");
         messageBoxError.setFixedSize(500,200);
+        stopfunc();
+    }else if(rgxerror == true){
+        stopfunc();
     }
 }
 
@@ -117,8 +145,10 @@ void MainWindow::on_run_button2_clicked(bool checked)
 {
     if(checked == true){
 
+        //reset text button
         ui->run_button2->setText("Stop");
 
+        //Trava alterações enquanto ativado e pinta campos de gray
         ui->regex_txt->setReadOnly(true);
         ui->src_txt->setReadOnly(true);
         ui->dst_txt->setReadOnly(true);
@@ -136,11 +166,16 @@ void MainWindow::on_run_button2_clicked(bool checked)
         //Armazenamento e conversão do refresh rate
         QString refrashrates = ui->refresh_txt->text();
         int refrashrate = refrashrates.toInt();
+        //Refresh minimo/default
+        if(refrashrate < 1)
+            refrashrate = 1;
+
         //connect funcao de refrash com objeto
         connect(tempo,SIGNAL(timeout()),this,SLOT(refresh()));
         tempo->start((refrashrate*1000));
     }else{
 
+        //Liberacao de campos ao parar auto refresh
         ui->regex_txt->setReadOnly(false);
         ui->src_txt->setReadOnly(false);
         ui->dst_txt->setReadOnly(false);
@@ -154,13 +189,13 @@ void MainWindow::on_run_button2_clicked(bool checked)
         ui->dst_txt->setPalette(gray_p);
         ui->refresh_txt->setPalette(gray_p);
 
-
         stopfunc();
+        //reset button text
         ui->run_button2->setText("Run");
     }
 }
 
-//Função de Refresh
+//Função de Refresh (deletar eutilizar apenas click run)
 void MainWindow::refresh(){
     on_run_button_clicked();
 }
@@ -168,4 +203,116 @@ void MainWindow::refresh(){
 //Função de parada (acionada em possiveis erros de diretorio e no acionamento do botão Stop)
 void MainWindow::stopfunc(){
     tempo->stop();
+}
+/*
+void MainWindow::on_Save_Button_clicked()
+{
+    QString path = QFileDialog::getExistingDirectory(this,"Select Directory","C://");
+    //qDebug() << path;
+
+    //Conversão
+    QByteArray pathq = path.toLocal8Bit();
+    const char* pathstr = pathq.data();
+    char pathfile[1024];
+
+    strcpy(pathfile,pathstr);
+    strcat(pathfile,"/FileTransferLogs.txt");
+
+    FILE* sc = std::fopen("w",pathfile);
+
+    fclose(sc);
+}*/
+
+//Funcao para salvar configuracoes atuais
+void MainWindow::on_Save_Button_clicked()
+{
+    QString fileName;
+    fileName = QFileDialog::getSaveFileName(this, tr("Save File"), "X://TesteCpp",tr("ThalesFile (*.thales)"));
+    QFile data(fileName);
+    if (data.open(QFile::WriteOnly | QFile::Truncate)) {
+        QTextStream out(&data);
+        out << ui->regex_txt->text();
+        out << "\n";
+        out << ui->src_txt->text();
+        out << "\n";
+        out << ui->dst_txt->text();
+        out << "\n";
+        out << ui->refresh_txt->text();
+        out << "\n";
+        data.close();
+    }else{
+        QMessageBox messageBoxError;
+        messageBoxError.critical(0,"Error","Can't save file");
+        messageBoxError.setFixedSize(500,200);
+    }
+
+}
+
+//Funcar para carregar configuracoes
+void MainWindow::on_pushButton_2_clicked()
+{
+
+    QFile file(QFileDialog::getOpenFileName(this,tr("Open File"),"X://TesteCpp",tr("ThalesFile (*.thales)")));
+    if(file.open(QIODevice::ReadOnly | QIODevice::Text)){
+        QTextStream stream(&file);
+
+        ui->regex_txt->setText(stream.readLine());
+        ui->src_txt->setText(stream.readLine());
+        ui->dst_txt->setText(stream.readLine());
+        ui->refresh_txt->setText(stream.readLine());
+        file.close();
+        //qDebug() << regx << src << dst << refresh;
+
+    }else{
+        QMessageBox messageBoxError;
+        messageBoxError.critical(0,"Error","Can't laod file");
+        messageBoxError.setFixedSize(500,200);
+
+
+    }
+
+}
+
+//salva log transfer
+void MainWindow::putlog(char srcc[], char dstt[]){
+
+    QFile data("X://TesteCpp/Log.txt");
+
+    if (data.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text)) {
+        QTextStream out(&data);
+
+        out << QDateTime::currentDateTime().toString("dd:MM:yyyy  hh:mm:ss");
+        out << " -Source:" << srcc;
+        out << " -Destination:" << dstt;
+        out << "\n";
+
+        data.close();
+    }else{
+        QMessageBox messageBoxError;
+        messageBoxError.critical(0,"Error","Error in write log");
+        messageBoxError.setFixedSize(500,200);
+    }
+
+
+}
+
+//salva log start
+void MainWindow::putstartlog(){
+
+    QFile data("X://TesteCpp/Log.txt");
+
+    if (data.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text)) {
+        QTextStream out(&data);
+
+        out << QDateTime::currentDateTime().toString("dd:MM:yyyy  hh:mm:ss") << " -Program Inicialization";
+        out << "\n";
+
+        data.close();
+    }else{
+        QMessageBox messageBoxError;
+        messageBoxError.critical(0,"Error","Error in write log");
+        messageBoxError.setFixedSize(500,200);
+    }
+
+
 }

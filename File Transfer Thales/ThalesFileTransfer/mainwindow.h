@@ -24,6 +24,12 @@ private slots:
 
     void on_run_button2_clicked(bool checked);
 
+    void on_Save_Button_clicked();
+
+    void on_pushButton_2_clicked();
+    void putlog(char srcc[], char dstt[]);
+    void putstartlog();
+
 private:
     Ui::MainWindow *ui;
     QTimer* tempo;
