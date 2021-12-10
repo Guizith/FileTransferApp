@@ -11,12 +11,14 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -25,13 +27,22 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
+    QWidget *widget;
+    QVBoxLayout *verticalLayout;
+    QLabel *label;
     QLabel *label_2;
     QLabel *label_3;
+    QLabel *label_4;
+    QWidget *widget1;
+    QVBoxLayout *verticalLayout_2;
     QLineEdit *regex_txt;
     QLineEdit *src_txt;
     QLineEdit *dst_txt;
+    QLineEdit *refresh_txt;
+    QWidget *widget2;
+    QHBoxLayout *horizontalLayout;
     QPushButton *run_button;
-    QLabel *label;
+    QPushButton *run_button2;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -42,27 +53,76 @@ public:
         MainWindow->resize(800, 600);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        label_2 = new QLabel(centralwidget);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setGeometry(QRect(220, 180, 49, 16));
-        label_3 = new QLabel(centralwidget);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-        label_3->setGeometry(QRect(210, 220, 71, 16));
-        regex_txt = new QLineEdit(centralwidget);
-        regex_txt->setObjectName(QString::fromUtf8("regex_txt"));
-        regex_txt->setGeometry(QRect(280, 140, 113, 24));
-        src_txt = new QLineEdit(centralwidget);
-        src_txt->setObjectName(QString::fromUtf8("src_txt"));
-        src_txt->setGeometry(QRect(280, 180, 113, 24));
-        dst_txt = new QLineEdit(centralwidget);
-        dst_txt->setObjectName(QString::fromUtf8("dst_txt"));
-        dst_txt->setGeometry(QRect(280, 220, 113, 24));
-        run_button = new QPushButton(centralwidget);
-        run_button->setObjectName(QString::fromUtf8("run_button"));
-        run_button->setGeometry(QRect(300, 270, 80, 24));
-        label = new QLabel(centralwidget);
+        widget = new QWidget(centralwidget);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setGeometry(QRect(230, 130, 97, 141));
+        verticalLayout = new QVBoxLayout(widget);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout->setContentsMargins(0, 0, 0, 0);
+        label = new QLabel(widget);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(230, 140, 49, 16));
+
+        verticalLayout->addWidget(label);
+
+        label_2 = new QLabel(widget);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+
+        verticalLayout->addWidget(label_2);
+
+        label_3 = new QLabel(widget);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+
+        verticalLayout->addWidget(label_3);
+
+        label_4 = new QLabel(widget);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+
+        verticalLayout->addWidget(label_4);
+
+        widget1 = new QWidget(centralwidget);
+        widget1->setObjectName(QString::fromUtf8("widget1"));
+        widget1->setGeometry(QRect(330, 130, 110, 141));
+        verticalLayout_2 = new QVBoxLayout(widget1);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
+        regex_txt = new QLineEdit(widget1);
+        regex_txt->setObjectName(QString::fromUtf8("regex_txt"));
+
+        verticalLayout_2->addWidget(regex_txt);
+
+        src_txt = new QLineEdit(widget1);
+        src_txt->setObjectName(QString::fromUtf8("src_txt"));
+
+        verticalLayout_2->addWidget(src_txt);
+
+        dst_txt = new QLineEdit(widget1);
+        dst_txt->setObjectName(QString::fromUtf8("dst_txt"));
+
+        verticalLayout_2->addWidget(dst_txt);
+
+        refresh_txt = new QLineEdit(widget1);
+        refresh_txt->setObjectName(QString::fromUtf8("refresh_txt"));
+        refresh_txt->setAutoFillBackground(false);
+
+        verticalLayout_2->addWidget(refresh_txt);
+
+        widget2 = new QWidget(centralwidget);
+        widget2->setObjectName(QString::fromUtf8("widget2"));
+        widget2->setGeometry(QRect(230, 280, 211, 26));
+        horizontalLayout = new QHBoxLayout(widget2);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        run_button = new QPushButton(widget2);
+        run_button->setObjectName(QString::fromUtf8("run_button"));
+
+        horizontalLayout->addWidget(run_button);
+
+        run_button2 = new QPushButton(widget2);
+        run_button2->setObjectName(QString::fromUtf8("run_button2"));
+        run_button2->setCheckable(true);
+
+        horizontalLayout->addWidget(run_button2);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -80,10 +140,12 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Regex:", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "Source:", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "Destination:", nullptr));
-        run_button->setText(QCoreApplication::translate("MainWindow", "Run", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "Regex:", nullptr));
+        label_4->setText(QCoreApplication::translate("MainWindow", "Refresh Rate(seg):", nullptr));
+        run_button->setText(QCoreApplication::translate("MainWindow", "Run One Time", nullptr));
+        run_button2->setText(QCoreApplication::translate("MainWindow", "Run", nullptr));
     } // retranslateUi
 
 };

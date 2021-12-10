@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTimer>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,8 +19,13 @@ public:
 
 private slots:
     void on_run_button_clicked();
+    void refresh();
+    void stopfunc();
+
+    void on_run_button2_clicked(bool checked);
 
 private:
     Ui::MainWindow *ui;
+    QTimer* tempo;
 };
 #endif // MAINWINDOW_H
