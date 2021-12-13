@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QDir>
 #include <QTimer>
 
 
@@ -19,19 +20,27 @@ public:
 
 private slots:
     void on_run_button_clicked();
-    void refresh();
     void stopfunc();
 
     void on_run_button2_clicked(bool checked);
 
-    void on_Save_Button_clicked();
+    //void on_Save_Button_clicked();
 
-    void on_pushButton_2_clicked();
+    //void on_pushButton_2_clicked();
     void putlog(char srcc[], char dstt[]);
     void putstartlog();
+
+    void on_chart_button_clicked();
+
+    void on_Save_Button_2_triggered();
+
+    void on_Load_Config_triggered();
+
+    void on_Log_Report_Directory_triggered();
 
 private:
     Ui::MainWindow *ui;
     QTimer* tempo;
+    QString logpath = (QDir::tempPath());
 };
 #endif // MAINWINDOW_H

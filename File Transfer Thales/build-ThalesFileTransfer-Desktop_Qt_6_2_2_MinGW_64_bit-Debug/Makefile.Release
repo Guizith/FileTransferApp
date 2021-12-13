@@ -241,6 +241,9 @@ release/moc_mainwindow.cpp: ../ThalesFileTransfer/mainwindow.h \
 		../../Qt/6.2.2/mingw_64/include/QtCore/qloggingcategory.h \
 		../../Qt/6.2.2/mingw_64/include/QtWidgets/qtabwidget.h \
 		../../Qt/6.2.2/mingw_64/include/QtGui/qicon.h \
+		../../Qt/6.2.2/mingw_64/include/QtCore/QTimer \
+		../../Qt/6.2.2/mingw_64/include/QtCore/qtimer.h \
+		../../Qt/6.2.2/mingw_64/include/QtCore/qbasictimer.h \
 		release/moc_predefs.h \
 		../../Qt/6.2.2/mingw_64/bin/moc.exe
 	X:\Qt\6.2.2\mingw_64\bin\moc.exe $(DEFINES) --include "X:/File Transfer Thales/build-ThalesFileTransfer-Desktop_Qt_6_2_2_MinGW_64_bit-Debug/release/moc_predefs.h" -IX:/Qt/6.2.2/mingw_64/mkspecs/win32-g++ -I"X:/File Transfer Thales/ThalesFileTransfer" -IX:/Qt/6.2.2/mingw_64/include -IX:/Qt/6.2.2/mingw_64/include/QtWidgets -IX:/Qt/6.2.2/mingw_64/include/QtGui -IX:/Qt/6.2.2/mingw_64/include/QtCore -I. -IX:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -IX:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -IX:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -IX:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -IX:/Qt/Tools/mingw900_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -IX:/Qt/Tools/mingw900_64/x86_64-w64-mingw32/include ..\ThalesFileTransfer\mainwindow.h -o release\moc_mainwindow.cpp
@@ -401,6 +404,9 @@ release/main.o: ../ThalesFileTransfer/main.cpp ../ThalesFileTransfer/mainwindow.
 		../../Qt/6.2.2/mingw_64/include/QtCore/qloggingcategory.h \
 		../../Qt/6.2.2/mingw_64/include/QtWidgets/qtabwidget.h \
 		../../Qt/6.2.2/mingw_64/include/QtGui/qicon.h \
+		../../Qt/6.2.2/mingw_64/include/QtCore/QTimer \
+		../../Qt/6.2.2/mingw_64/include/QtCore/qtimer.h \
+		../../Qt/6.2.2/mingw_64/include/QtCore/qbasictimer.h \
 		../../Qt/6.2.2/mingw_64/include/QtWidgets/QApplication \
 		../../Qt/6.2.2/mingw_64/include/QtWidgets/qapplication.h \
 		../../Qt/6.2.2/mingw_64/include/QtCore/qcoreapplication.h \
@@ -556,6 +562,9 @@ release/mainwindow.o: ../ThalesFileTransfer/mainwindow.cpp ../ThalesFileTransfer
 		../../Qt/6.2.2/mingw_64/include/QtCore/qloggingcategory.h \
 		../../Qt/6.2.2/mingw_64/include/QtWidgets/qtabwidget.h \
 		../../Qt/6.2.2/mingw_64/include/QtGui/qicon.h \
+		../../Qt/6.2.2/mingw_64/include/QtCore/QTimer \
+		../../Qt/6.2.2/mingw_64/include/QtCore/qtimer.h \
+		../../Qt/6.2.2/mingw_64/include/QtCore/qbasictimer.h \
 		ui_mainwindow.h \
 		../../Qt/6.2.2/mingw_64/include/QtCore/QVariant \
 		../../Qt/6.2.2/mingw_64/include/QtWidgets/QApplication \
@@ -578,6 +587,11 @@ release/mainwindow.o: ../ThalesFileTransfer/mainwindow.cpp ../ThalesFileTransfer
 		../../Qt/6.2.2/mingw_64/include/QtGui/qinputmethod.h \
 		../../Qt/6.2.2/mingw_64/include/QtCore/qlocale.h \
 		../../Qt/6.2.2/mingw_64/include/QtGui/qguiapplication_platform.h \
+		../../Qt/6.2.2/mingw_64/include/QtWidgets/QHBoxLayout \
+		../../Qt/6.2.2/mingw_64/include/QtWidgets/qboxlayout.h \
+		../../Qt/6.2.2/mingw_64/include/QtWidgets/qlayout.h \
+		../../Qt/6.2.2/mingw_64/include/QtWidgets/qlayoutitem.h \
+		../../Qt/6.2.2/mingw_64/include/QtWidgets/qgridlayout.h \
 		../../Qt/6.2.2/mingw_64/include/QtWidgets/QLabel \
 		../../Qt/6.2.2/mingw_64/include/QtWidgets/qlabel.h \
 		../../Qt/6.2.2/mingw_64/include/QtWidgets/qframe.h \
@@ -598,12 +612,23 @@ release/mainwindow.o: ../ThalesFileTransfer/mainwindow.cpp ../ThalesFileTransfer
 		../../Qt/6.2.2/mingw_64/include/QtWidgets/qabstractbutton.h \
 		../../Qt/6.2.2/mingw_64/include/QtWidgets/QStatusBar \
 		../../Qt/6.2.2/mingw_64/include/QtWidgets/qstatusbar.h \
+		../../Qt/6.2.2/mingw_64/include/QtWidgets/QVBoxLayout \
 		../../Qt/6.2.2/mingw_64/include/QtWidgets/QWidget \
 		../../Qt/6.2.2/mingw_64/include/QtWidgets/QMessageBox \
 		../../Qt/6.2.2/mingw_64/include/QtWidgets/qmessagebox.h \
 		../../Qt/6.2.2/mingw_64/include/QtWidgets/qdialog.h \
 		../../Qt/6.2.2/mingw_64/include/QtCore/QDebug \
-		../../Qt/6.2.2/mingw_64/include/QtCore/QByteArray
+		../../Qt/6.2.2/mingw_64/include/QtCore/QByteArray \
+		../../Qt/6.2.2/mingw_64/include/QtCore/QDir \
+		../../Qt/6.2.2/mingw_64/include/QtCore/qdir.h \
+		../../Qt/6.2.2/mingw_64/include/QtCore/qfile.h \
+		../../Qt/6.2.2/mingw_64/include/QtCore/qfiledevice.h \
+		../../Qt/6.2.2/mingw_64/include/QtCore/qfileinfo.h \
+		../../Qt/6.2.2/mingw_64/include/QtCore/qdatetime.h \
+		../../Qt/6.2.2/mingw_64/include/QtCore/qcalendar.h \
+		../../Qt/6.2.2/mingw_64/include/QtCore/QDateTime \
+		../../Qt/6.2.2/mingw_64/include/QtWidgets/QFileDialog \
+		../../Qt/6.2.2/mingw_64/include/QtWidgets/qfiledialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\mainwindow.o ..\ThalesFileTransfer\mainwindow.cpp
 
 release/moc_mainwindow.o: release/moc_mainwindow.cpp 
