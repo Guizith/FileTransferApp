@@ -31,6 +31,7 @@ public:
     QAction *Save_Button_2;
     QAction *Load_Config;
     QAction *Log_Report_Directory;
+    QAction *actionQuit;
     QWidget *centralwidget;
     QLabel *label_5;
     QWidget *layoutWidget;
@@ -52,6 +53,9 @@ public:
     QPushButton *chart_button;
     QLabel *label_6;
     QLabel *label_7;
+    QLabel *label_8;
+    QPushButton *pushButton;
+    QPushButton *pushButton_2;
     QMenuBar *menubar;
     QMenu *menuSetting;
     QStatusBar *statusbar;
@@ -60,21 +64,23 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(625, 517);
+        MainWindow->resize(396, 424);
         Save_Button_2 = new QAction(MainWindow);
         Save_Button_2->setObjectName(QString::fromUtf8("Save_Button_2"));
         Load_Config = new QAction(MainWindow);
         Load_Config->setObjectName(QString::fromUtf8("Load_Config"));
         Log_Report_Directory = new QAction(MainWindow);
         Log_Report_Directory->setObjectName(QString::fromUtf8("Log_Report_Directory"));
+        actionQuit = new QAction(MainWindow);
+        actionQuit->setObjectName(QString::fromUtf8("actionQuit"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         label_5 = new QLabel(centralwidget);
         label_5->setObjectName(QString::fromUtf8("label_5"));
-        label_5->setGeometry(QRect(420, 260, 51, 16));
+        label_5->setGeometry(QRect(300, 220, 51, 16));
         layoutWidget = new QWidget(centralwidget);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(200, 140, 97, 141));
+        layoutWidget->setGeometry(QRect(80, 100, 97, 141));
         verticalLayout = new QVBoxLayout(layoutWidget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         verticalLayout->setContentsMargins(0, 0, 0, 0);
@@ -100,7 +106,7 @@ public:
 
         layoutWidget1 = new QWidget(centralwidget);
         layoutWidget1->setObjectName(QString::fromUtf8("layoutWidget1"));
-        layoutWidget1->setGeometry(QRect(300, 140, 110, 141));
+        layoutWidget1->setGeometry(QRect(180, 100, 110, 141));
         verticalLayout_2 = new QVBoxLayout(layoutWidget1);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
@@ -127,7 +133,7 @@ public:
 
         layoutWidget2 = new QWidget(centralwidget);
         layoutWidget2->setObjectName(QString::fromUtf8("layoutWidget2"));
-        layoutWidget2->setGeometry(QRect(200, 290, 211, 26));
+        layoutWidget2->setGeometry(QRect(80, 250, 211, 26));
         horizontalLayout = new QHBoxLayout(layoutWidget2);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
@@ -144,19 +150,39 @@ public:
 
         chart_button = new QPushButton(centralwidget);
         chart_button->setObjectName(QString::fromUtf8("chart_button"));
-        chart_button->setGeometry(QRect(200, 330, 211, 31));
+        chart_button->setGeometry(QRect(80, 290, 211, 31));
         label_6 = new QLabel(centralwidget);
         label_6->setObjectName(QString::fromUtf8("label_6"));
-        label_6->setGeometry(QRect(240, 360, 131, 16));
+        label_6->setGeometry(QRect(120, 330, 131, 16));
         label_7 = new QLabel(centralwidget);
         label_7->setObjectName(QString::fromUtf8("label_7"));
-        label_7->setGeometry(QRect(190, 20, 201, 101));
-        label_7->setPixmap(QPixmap(QString::fromUtf8("Parceiro-Thales-Group.png")));
-        label_7->setScaledContents(true);
+        label_7->setGeometry(QRect(160, 10, 71, 61));
+        QFont font;
+        font.setFamilies({QString::fromUtf8("Segoe UI Black")});
+        font.setPointSize(12);
+        font.setBold(true);
+        font.setItalic(true);
+        font.setUnderline(true);
+        label_7->setFont(font);
+        label_8 = new QLabel(centralwidget);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+        label_8->setGeometry(QRect(100, 50, 201, 61));
+        QFont font1;
+        font1.setPointSize(12);
+        font1.setBold(true);
+        font1.setItalic(true);
+        font1.setUnderline(true);
+        label_8->setFont(font1);
+        pushButton = new QPushButton(centralwidget);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setGeometry(QRect(300, 140, 21, 24));
+        pushButton_2 = new QPushButton(centralwidget);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        pushButton_2->setGeometry(QRect(300, 180, 21, 24));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 625, 21));
+        menubar->setGeometry(QRect(0, 0, 396, 21));
         menuSetting = new QMenu(menubar);
         menuSetting->setObjectName(QString::fromUtf8("menuSetting"));
         MainWindow->setMenuBar(menubar);
@@ -168,6 +194,7 @@ public:
         menuSetting->addAction(Save_Button_2);
         menuSetting->addAction(Load_Config);
         menuSetting->addAction(Log_Report_Directory);
+        menuSetting->addAction(actionQuit);
 
         retranslateUi(MainWindow);
 
@@ -180,17 +207,21 @@ public:
         Save_Button_2->setText(QCoreApplication::translate("MainWindow", "Save Config", nullptr));
         Load_Config->setText(QCoreApplication::translate("MainWindow", "Load Config", nullptr));
         Log_Report_Directory->setText(QCoreApplication::translate("MainWindow", "Log Report Directory", nullptr));
+        actionQuit->setText(QCoreApplication::translate("MainWindow", "Quit", nullptr));
         label_5->setText(QCoreApplication::translate("MainWindow", "Default: 1", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "Regex:", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "Source:", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "Destination:", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "Refresh Rate(seg):", nullptr));
-        run_button->setText(QCoreApplication::translate("MainWindow", "Run One Time", nullptr));
+        run_button->setText(QCoreApplication::translate("MainWindow", "Run Once", nullptr));
         run_button2->setText(QCoreApplication::translate("MainWindow", "Run", nullptr));
         chart_button->setText(QCoreApplication::translate("MainWindow", "Log Transfer Chart", nullptr));
         label_6->setText(QCoreApplication::translate("MainWindow", "*need gnuplot installed", nullptr));
-        label_7->setText(QString());
-        menuSetting->setTitle(QCoreApplication::translate("MainWindow", "Setting", nullptr));
+        label_7->setText(QCoreApplication::translate("MainWindow", "THALES ", nullptr));
+        label_8->setText(QCoreApplication::translate("MainWindow", "File Transfer Software", nullptr));
+        pushButton->setText(QCoreApplication::translate("MainWindow", "...", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("MainWindow", "...", nullptr));
+        menuSetting->setTitle(QCoreApplication::translate("MainWindow", "Settings", nullptr));
     } // retranslateUi
 
 };

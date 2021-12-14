@@ -38,9 +38,16 @@ private slots:
 
     void on_Log_Report_Directory_triggered();
 
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_actionQuit_triggered();
+
 private:
     Ui::MainWindow *ui;
-    QTimer* tempo;
-    QString logpath = (QDir::tempPath());
+    QTimer* tempo;  //refresh time
+    QString logpath = (QDir::tempPath()); //caminho padrao de log
+    bool startlogg = false; //Confirmacao de start log
 };
 #endif // MAINWINDOW_H
